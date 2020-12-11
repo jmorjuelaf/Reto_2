@@ -12,3 +12,8 @@ class UserOut(BaseModel):
     dob:str
 
 
+class UserAuth(BaseModel):
+    username: str
+    password: str
+
+
