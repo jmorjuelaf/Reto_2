@@ -27,7 +27,7 @@ async def home():
 #     return  {"Autenticado El usuario " + user_in.username + " ha ingresado" }
 
 
-@api.post("/user/auth/{username}/{password}")
+@api.post("/user/auth/")
 async def auth_user(username: str,password: str):
 
     user_in_db = get_user(username)
@@ -88,16 +88,20 @@ async def make_create_user(username: str,password: str,email: str,dob: str):
 
 
 @api.put("/user/update/")
-async def make_update(user_in: UserIn):
+async def make_update(username: str,password: str,email: str,dob: str):
 
-    user_in_db = get_user(user_in.username)
+    user_in_db = get_user(username)
+
+
 
     if user_in_db == None:
         raise HTTPException(status_code=404, detail="El usuario no existe")
+    else:
+        user_in_db = UserIn(**dict({"username":username, "password":password, "email":email, "dob":dob}))
+        update_user(user_in_db)
+        return {"El usuario " + username + " ha sido actualizado"}
 
-    update_user(user_in_db)
-
-    return {"Actualizado": True}
+    return None
 
 
 # @api.delete("/user/delete/")
@@ -112,7 +116,7 @@ async def make_update(user_in: UserIn):
 
 #     return {"Eliminado": True}
 
-@api.delete("/user/delete/{username}")
+@api.delete("/user/delete/")
 async def make_delete_user(username):
 
     user_in_db = get_user(username)
