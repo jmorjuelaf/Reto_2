@@ -35,7 +35,7 @@ database_users = {
                             "password": "suamadre",
                             "email": "szapatao@unal.edu.co",
                             "dob": "1992-04-07"}),
-    "JuanEsteban05": UserInDB(**{"username": "JuanEs05",
+    "JuanEs05": UserInDB(**{"username": "JuanEs05",
                             "password": "naruto",
                             "email": "juanes@gmail.com",
                             "dob": "1995-06-13"}),
